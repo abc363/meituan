@@ -1,23 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <!-- 路由占位符 (通过路由匹配的组件都会渲染router-view中去-->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
+export default{
+  name:"app"
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="less" >
+*{
+  margin:0;
+  padding: 0;
+}
+ul,li{
+  list-style: none;
 }
 </style>

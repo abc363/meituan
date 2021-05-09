@@ -1,0 +1,23 @@
+{
+  "id": "1867493",
+  "name": "login",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1013076",
+      "name": "人",
+      "font_class": "wo",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "15056487",
+      "name": "锁头",
+      "font_class": "suotou",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}
