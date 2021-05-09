@@ -82,7 +82,7 @@
     </div>
     </div>
   
-    <i-dialog v-model="dialogVisible"
+    <el-dialog :visible.sync="dialogVisible"
     :title="dialogTitle"
     :showButton="true"
     ref="dialog"
@@ -91,12 +91,12 @@
     @dialog-confirm="dialogConfirm">
     <el-form :model="dialogFromData" label-width="100px" :rules="rules" ref="ruleForm">
       <el-row>
-     <el-col :span="12"> 
+     <el-col :span="24"> 
     <el-form-item label="商品名称" prop="name">
     <el-input v-model="dialogFromData.name"></el-input>
     </el-form-item>
     </el-col>
-    <el-col :span="12"> 
+    <el-col :span="24"> 
     <el-form-item label="分类" prop="classify">
      <el-select v-model="dialogFromData.classify" placeholder="请选择">
       <el-option
@@ -108,29 +108,41 @@
     </el-select>
     </el-form-item>
     </el-col>
-    <el-col :span="12"> 
+    <el-col :span="24"> 
     <el-form-item label="库存" prop="num">
     <el-input v-model.number="dialogFromData.num"></el-input>
     </el-form-item>
     </el-col>
-    <el-col :span="12"> 
+    <el-col :span="24"> 
     <el-form-item label="在售价" prop="price">
     <el-input type="number" v-model.number="dialogFromData.price"></el-input>
     </el-form-item>
     </el-col>
-    <el-col :span='12'>
+    <el-col :span='24'>
       <el-form-item label="商品介绍" prop="info">
         <el-input type="textarea" v-model="dialogFromData.info" placeholder="请输入"></el-input>
       </el-form-item>
     </el-col>
-    <!-- <el-col :span="12">
+   
+    <el-col :span="24">
       <el-form-item label="图片" prop="img">
-        <i-file v-model="dialogFromData.img"></i-file>
+        <el-upload
+            class="upload-demo"
+            action="http://120.55.95.122:8080/image/uploadFile"
+            :limit="1"
+            :file-list="fileList">
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
       </el-form-item>
-    </el-col> -->
+    </el-col>
     </el-row>
     </el-form>
-    </i-dialog>
+     <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
 </div>
 
 </template>
@@ -160,6 +172,7 @@ export default {
           info: ''
         },
         shop:{},
+      fileList: [],
         visible: false,
         dialogVisible: false,
         dialogTitle: '',
@@ -222,13 +235,25 @@ export default {
       }
     },
     mounted(){
-      this.search()
+      this.showPro()
     },
     methods: {
       fetch () {
-        this.pageInfo.pageSize = 10
-        this.pageInfo.startPage = 0
-        this.search()
+        // this.pageInfo.pageSize = 10
+        // this.pageInfo.startPage = 0
+        // this.search()
+      },
+      showPro(){
+         this.get('/products/show',this.pageInfo).then(res => {
+           console.log("8888",res)   
+          this.tableData = res.tableData
+          this.totalNum = res.totalNum
+        }).catch(res=>{
+          return this.$error(`请求失败！${res.message}`);
+        }).finally(e=>{
+            this.isVisible = false;
+            this.$emit('showProduct');
+        })
       },
       search () {
         this.$refs.iSearch.validate(async valid => {
@@ -381,11 +406,14 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 *{
     margin: 0;
     padding: 0;
 }
+ .el-select{
+    width: 100% !important;
+  }
 .title-wrap{
     width: 100%;
     height: 60px;
@@ -402,6 +430,7 @@ export default {
     margin-left: 50px;
     font-weight: 800;
   }
+ 
   .user-info {
     display: flex;
     align-items: center;

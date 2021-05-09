@@ -10,14 +10,14 @@ import './plugins/element.js'
 import './assets/css/global.css'
 import './assets/icon/iconfont.css'
 import axios from 'axios'
-import  {get , post } from "../src/util.js"  //  form 后就加上你文件的地址
+import { get, post } from '../src/util.js'  //  form 后就加上你文件的地址
 Vue.prototype.get = get;
-Vue.prototype.post = post ;
+Vue.prototype.post = post;
 Vue.prototype.$error = function (msg) {
-  this.$message({message: msg,type:'error',offset:80,duration:3000})
+  this.$message({ message: msg, type: 'error', offset: 80, duration: 3000 })
 }
 Vue.prototype.$success = function (msg) {
-  this.$message({message: msg,type:'success',offset:80,duration:3000})
+  this.$message({ message: msg, type: 'success', offset: 80, duration: 3000 })
 }
 Vue.prototype.$domain = "http://windiiot.oss-cn-beijing.aliyuncs.com/";
 // 配置请求的根路径
@@ -27,7 +27,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.defaults.withCredentials = true;
 axios.defaults.crossDomain = true;
 // 请求超时时间
-axios.defaults.timeout = 100000; 
+axios.defaults.timeout = 100000;
 // 将axios库挂载到Vue的原型，使vue的每一个组件都能通过$http进行访问从而发起请求
 
 Vue.prototype.$http = axios

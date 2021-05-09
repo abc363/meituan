@@ -28,7 +28,7 @@
         <el-form-item prop="img" label="头像">
           <el-upload
             class="upload-demo"
-            action="http://120.55.95.122:8080/uploadFile"
+            action="http://120.55.95.122:8080/image/uploadFile"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             :before-remove="beforeRemove"
