@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import obj from '../main.js';
+
 export default {
   data(){
     return{
@@ -63,8 +65,10 @@ export default {
         if(!valid)return;
         // 解构把data中的信息传给res
         this.post('/shops/login',this.loginForm).then(res => {
+          console.log(res)
+          obj.sid = res.data.sid;   
           this.$message.success("登陆成功！")
-          this.$router.push("/system")
+          // this.$router.push("/system")
         }).catch(res=>{
               return this.$error(`请求失败！${res.message}`);
         }).finally(e=>{

@@ -32,7 +32,9 @@ axios.defaults.timeout = 100000;
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
-
+export default{
+  sid:1,
+}
 Vue.use(ElementUI);
 /* eslint-disable no-new */
 new Vue({
